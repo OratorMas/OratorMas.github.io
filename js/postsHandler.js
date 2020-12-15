@@ -52,10 +52,10 @@ const showAllPosts = (userID, isPrev) => {
             database.ref('users/'+userID).once('value', snapshot => {
                 postsCount = snapshot.val().postsOnPage;
                 if(parseInt(isPrev) === 0 || parseInt(isPrev) === 1){
-                    if(parseInt(isPrev) === 1 && showedPosts < posts.length-parseInt(postsCount)-1) {
+                    if(parseInt(isPrev) === 0 && showedPosts < posts.length-parseInt(postsCount)) {
                         showedPosts = parseInt(showedPosts)+parseInt(postsCount);
                         //nextPage
-                    } else if (parseInt(isPrev) === 0 && showedPosts !== 0) {
+                    } else if (parseInt(isPrev) === 1 && showedPosts !== 0) {
                         showedPosts=parseInt(showedPosts)-parseInt(postsCount);
                         //prevPage
                     } else {
@@ -107,11 +107,11 @@ const postHandlerInit = () => {
     showAllPosts();
     nextPageButton.addEventListener('click', event => {
         event.preventDefault();
-        showAllPosts(auth.currentUser.uid, 1)
+        showAllPosts(auth.currentUser.uid, 0)
     })
     prevPageButton.addEventListener('click', event => {
         event.preventDefault();
-        showAllPosts(auth.currentUser.uid, parseInt(0))
+        showAllPosts(auth.currentUser.uid, 1)
     })
     newPostButton.addEventListener('click', event => {
         event.preventDefault();
