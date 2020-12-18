@@ -305,7 +305,7 @@ body {
   text-decoration: none;
   margin-right: auto;
 }
-.user-avatar {
+.user-photo {
   border-radius: 50%;
   margin-right: 17px;
   object-fit: cover;
