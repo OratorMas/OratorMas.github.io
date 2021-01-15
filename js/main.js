@@ -122,7 +122,12 @@ const setUsers = {
           if (postsCount){
             database.ref('users/'+user.uid).update({
               postsOnPage: postsCount
-            }).then(()=>updatePage())
+            }).then(()=>
+                    {
+              updatePage();
+              postsOnPage = 0;
+              printPosts(user.uid);
+            })
           }
         })
     }
